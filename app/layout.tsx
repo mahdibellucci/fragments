@@ -4,9 +4,40 @@ import { Toaster } from '@/components/ui/toaster'
 import { Analytics } from '@vercel/analytics/next'
 import { GoogleTagManager } from '@next/third-parties/google'
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+// Google Fonts is unreachable from this sandbox, so `next/font/google` (Inter)
+// cannot fetch its CSS at build time. We self-host the exact same Inter family
+// via the `@fontsource/inter` npm package instead.
+import localFont from 'next/font/local'
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = localFont({
+  src: [
+    {
+      path: '../node_modules/@fontsource/inter/files/inter-latin-300-normal.woff2',
+      weight: '300',
+      style: 'normal',
+    },
+    {
+      path: '../node_modules/@fontsource/inter/files/inter-latin-400-normal.woff2',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: '../node_modules/@fontsource/inter/files/inter-latin-500-normal.woff2',
+      weight: '500',
+      style: 'normal',
+    },
+    {
+      path: '../node_modules/@fontsource/inter/files/inter-latin-600-normal.woff2',
+      weight: '600',
+      style: 'normal',
+    },
+    {
+      path: '../node_modules/@fontsource/inter/files/inter-latin-700-normal.woff2',
+      weight: '700',
+      style: 'normal',
+    },
+  ],
+})
 
 export const metadata: Metadata = {
   title: 'Fragments by E2B',
